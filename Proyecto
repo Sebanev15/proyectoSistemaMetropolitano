@@ -1,0 +1,1034 @@
+import java.util.Arrays;
+import java.util.Scanner; 
+
+public class ej1 { 
+
+Scanner teclado = new Scanner (System.in); 
+
+String categoriaA[] = new String[5]; 
+
+String categoriaB[] = new String[5]; 
+
+String categoriaC[] = new String[5]; 
+
+String categoriaD[] = new String[5]; 
+
+String categoriaE[] = new String[5]; 
+
+String categoriaF[] = new String[5]; 
+
+String totalPasajeros[] = new String[30]; 
+
+int cantidadP; 
+
+String parada[] = new String [20]; 
+String[] conexion = new String [30]; 
+String [] lineaConexion = new String [30];
+ 
+
+public void menuPrincipal() { 
+
+int opcionPrincipal = 0; 
+
+int ingresoDato =0; 
+
+ 
+
+System.out.println("Ingrese una opcion"); 
+
+System.out.println("1: Menu pasajeros"); 
+
+System.out.println("2: Menu parada"); 
+
+System.out.print("Ingrese una opcion: "); 
+
+opcionPrincipal = teclado.nextInt(); 
+
+ 
+
+ 
+
+switch (opcionPrincipal) { 
+
+case 1: 
+
+menuPasajero (); 
+
+break; 
+
+case 2: 
+
+menuParada(); 
+
+break; 
+
+default: 
+
+System.out.println("ERROR Opcion incorrecto"); 
+
+menuPrincipal(); 
+
+} 
+
+ 
+
+  
+
+ 
+
+} 
+
+ 
+
+public void menuPasajero() { 
+
+int opcionMPasajero = 0; 
+
+ 
+
+ 
+
+System.out.println("Ingrese otra opcion"); 
+
+System.out.println("1: Ingresar pasajero"); 
+
+System.out.println("2: Mostrar pasajero por categoria"); 
+
+System.out.println("3: Buscar pasajero"); 
+
+System.out.println("0: Salir"); 
+
+System.out.print("Ingrese una opcion: "); 
+
+opcionMPasajero = teclado.nextInt(); 
+
+ 
+
+switch (opcionMPasajero) { 
+
+case 1: 
+
+ingresarPasajero(); 
+
+break; 
+
+case 2: 
+
+mostrarPasajeroPorCategoria (); 
+
+break; 
+
+case 3: 
+
+buscarPasajero(); 
+
+break; 
+
+case 0: 
+
+menuPrincipal (); 
+
+break; 
+
+default: 
+
+System.out.println("ERROR Opcion incorrecta"); 
+
+menuPasajero(); 
+
+} 
+
+ 
+
+ 
+
+} 
+
+ 
+
+public void ingresarPasajero() { 
+
+int cantidadA = 0, cantidadB = 0, cantidadC = 0, cantidadD = 0, cantidadE = 0, cantidadF = 0, opcion = 0; 
+
+String cedula,nombre,telefono,categoria; 
+
+System.out.println("categoria A = comun"); 
+
+System.out.println("categoria B = jubilado "); 
+
+System.out.println("categoria C = pensionistas"); 
+
+System.out.println("categoria D = estudiantes A"); 
+
+System.out.println("categoria E = estudiantes B"); 
+
+System.out.println("categoria F = docentes"); 
+
+System.out.println(""); 
+
+System.out.print ("Cuantos pasajeros quiere ingresar (menor a 30): "); 
+
+cantidadP = teclado.nextInt(); 
+
+ 
+
+totalPasajeros  = new String[cantidadP]; 
+
+ 
+
+ 
+
+for (int i=0; i< cantidadP; i++) { 
+
+do{ 
+
+System.out.print("Ingrese la cedula del pasajero: "); 
+
+cedula = teclado.next(); 
+
+}while(cedula.length()<1); 
+
+do { 
+
+System.out.print("Ingrese el nombre del pasajero: "); 
+
+nombre=teclado.next(); 
+
+}while(nombre.length()<3); 
+
+do { 
+
+System.out.print("Ingrese el telefono del pasajero: "); 
+
+telefono =teclado.next(); 
+
+}while(telefono.length()<1); 
+
+do { 
+
+System.out.print("Ingrese la categoria del pasajero: "); 
+
+categoria=teclado.next(); 
+
+}while(categoria.length()<1); 
+
+System.out.println(""); 
+
+ 
+
+if (cedula.equals(null) || nombre.equals(null) || telefono.equals(null) || categoria.equals(null) ) { 
+
+System.out.print("Error, existen datos nulos o vacios"); 
+
+i = cantidadP; 
+
+}else { 
+
+System.out.println("¡¡¡Datos guardados de manera exitosa!!!"); 
+
+if (categoria.equals("A") || categoria.equals("a")) { 
+
+categoriaA[cantidadA] = nombre + ", " + cedula + ", " + telefono + ", " + categoria; 
+
+totalPasajeros[i] = nombre + ", " + cedula + ", " + telefono + ", " + categoria; 
+
+cantidadA ++; 
+
+if (cantidadA > 5) { 
+
+System.out.print("ERROR Ingreso mas de 5 datos en una categoria"); 
+
+i = cantidadP;  
+
+} 
+
+} 
+
+if (categoria.equals("B") || categoria.equals("b")) { 
+
+categoriaB[cantidadB] = nombre + ", " + cedula + ", " + telefono + ", " + categoria; 
+
+totalPasajeros[i] = nombre + ", " + cedula + ", " + telefono + ", " + categoria; 
+
+cantidadB ++; 
+
+if (cantidadB > 5) { 
+
+System.out.print("ERROR Ingreso mas de 5 datos en una categoria"); 
+
+i = cantidadP;  
+
+} 
+
+} 
+
+if (categoria.equals("C") || categoria.equals("c")) { 
+
+categoriaC[cantidadC] = cedula + ", " + nombre + ", " + telefono + ", " + categoria; 
+
+totalPasajeros[i] = cedula + ", " + nombre + ", " + telefono + ", " + categoria ; 
+
+cantidadC ++; 
+
+if (cantidadC > 5) { 
+
+System.out.print("ERROR Ingreso mas de 5 datos en una categoria"); 
+
+i = cantidadP;  
+
+} 
+
+} 
+
+if (categoria.equals("D") || categoria.equals("d")) { 
+
+categoriaD[cantidadD] = cedula + ", " + nombre + ", " + telefono + ", " + categoria; 
+
+totalPasajeros[i] = cedula + ", " + nombre + ", " + telefono + ", " + categoria; 
+
+cantidadD ++; 
+
+if (cantidadD > 5) { 
+
+System.out.print("ERROR Ingreso mas de 5 datos en una categoria"); 
+
+i = cantidadP;  
+
+} 
+
+} 
+
+if (categoria.equals("E") || categoria.equals("e")) { 
+
+categoriaE[cantidadE] = cedula + ", " + nombre + ", " + telefono + ", " + categoria; 
+
+totalPasajeros[i] = cedula + ", " + nombre + ", " + telefono + ", " + categoria; 
+
+cantidadE ++; 
+
+if (cantidadE > 5) { 
+
+System.out.print("ERROR Ingreso mas de 5 datos en una categoria"); 
+
+i = cantidadP;  
+
+} 
+
+} 
+
+if (categoria.equals("F") || categoria.equals("f")) { 
+
+categoriaF[cantidadF] = cedula + ", " + nombre + ", " + telefono + ", " + categoria; 
+
+totalPasajeros[i] = cedula + ", " + nombre + ", " + telefono + ", " + categoria; 
+
+cantidadF ++; 
+
+if (cantidadF > 5) { 
+
+System.out.print("ERROR Ingreso mas de 5 datos en una categoria"); 
+
+i = cantidadP;  
+
+} 
+
+} 
+
+ 
+
+}	 
+
+  
+
+} 
+
+  
+
+System.out.println("¿Que quiere hacer ahora?"); 
+
+System.out.println("1: Volver a ingresar datos"); 
+
+System.out.println("2: Mostrar pasajeros por categoria"); 
+
+System.out.println("3: Buscar pasajero por cedula"); 
+
+System.out.println("0: Salir"); 
+
+System.out.print("Ingrese opcion: "); 
+
+opcion = teclado.nextInt(); 
+
+ 
+
+switch (opcion) { 
+
+case 1: 
+
+ingresarPasajero (); 
+
+break; 
+
+case 2: 
+
+mostrarPasajeroPorCategoria(); 
+
+break; 
+
+case 3: 
+
+buscarPasajero (); 
+
+break; 
+
+case 0: 
+
+menuPasajero (); 
+
+break; 
+
+default: 
+
+System.out.println("ERROR Opcion incorrecta"); 
+
+} 
+
+} 
+
+ 
+
+ 
+
+ 
+
+public void mostrarPasajeroPorCategoria() { 
+
+int opcion = 0; 
+
+ 
+
+System.out.println("¿De que categoria quiere ver datos?"); 
+
+System.out.println("1: Comun"); 
+
+System.out.println("2: Jubilado"); 
+
+System.out.println("3: Pensionista"); 
+
+System.out.println("4: Estudiante A"); 
+
+System.out.println("5: Estudiante B"); 
+
+System.out.println("6: Docente"); 
+
+System.out.println("0: Salir"); 
+
+System.out.println(""); 
+
+System.out.print("Ingrese una opcion: "); 
+
+opcion = teclado.nextInt(); 
+
+ 
+
+switch(opcion) { 
+
+case 1: 
+
+System.out.println("Datos de la categoria A: "); 
+
+for (int x = 0; x < categoriaA.length; x++) { 
+
+System.out.println(categoriaA[x]); 
+
+} 
+
+break; 
+
+case 2: 
+
+System.out.println("Datos de la categoria B: "); 
+
+for (int x = 0; x < categoriaB.length; x++) { 
+
+System.out.println(categoriaB[x]); 
+
+} 
+
+break; 
+
+case 3: 
+
+System.out.println("Datos de la categoria C: "); 
+
+for (int x = 0; x < categoriaC.length; x++) { 
+
+System.out.println(categoriaC[x]); 
+
+} 
+
+break; 
+
+case 4: 
+
+System.out.println("Datos de la categoria D: "); 
+
+for (int x = 0; x < categoriaD.length; x++) { 
+
+System.out.println(categoriaD[x]); 
+
+} 
+
+break; 
+
+case 5: 
+
+System.out.println("Datos de la categoria E: "); 
+
+for (int x = 0; x < categoriaE.length; x++) { 
+
+System.out.println(categoriaE[x]); 
+
+} 
+
+break; 
+
+case 6: 
+
+System.out.println("Datos de la categoria F: "); 
+
+for (int x = 0; x < categoriaF.length; x++) { 
+
+System.out.println(categoriaF[x]); 
+
+} 
+
+break; 
+
+case 0: 
+
+menuPasajero(); 
+
+break; 
+
+default: 
+
+System.out.print("ERROR Opcion incorrecta"); 
+
+ 
+
+ 
+
+} 
+
+ 
+
+System.out.println("¿Que quiere hacer ahora?"); 
+
+System.out.println("1: ingresar datos"); 
+
+System.out.println("2: Volver a mostrar pasajeros por categoria"); 
+
+System.out.println("3: Buscar pasajero por cedula"); 
+
+System.out.println("0: Salir"); 
+
+System.out.print("Ingrese opcion: "); 
+
+opcion = teclado.nextInt(); 
+
+ 
+
+switch (opcion) { 
+
+case 1: 
+
+ingresarPasajero (); 
+
+break; 
+
+case 2: 
+
+mostrarPasajeroPorCategoria(); 
+
+break; 
+
+case 3: 
+
+buscarPasajero (); 
+
+break; 
+
+case 0: 
+
+menuPasajero (); 
+
+break; 
+
+default: 
+
+System.out.println("ERROR Opcion incorrecta"); 
+
+} 
+
+ 
+
+ 
+
+} 
+
+ 
+
+public void buscarPasajero () { 
+
+ 
+
+for (int i = cantidadP; i < totalPasajeros.length; i++) { 
+
+totalPasajeros[i] = " "; 
+
+} 
+
+int repetir=0; 
+
+ 
+
+ 
+
+do { 
+
+System.out.print("Ingrese la cedula del usuario a buscar: "); 
+
+String compararCedula = teclado.next(); 
+
+ 
+
+for (int i = 0; i < totalPasajeros.length; i++) { 
+
+String buscar[] = totalPasajeros[i].split(","); 
+
+String sinEspacio[] = buscar[1].split(" "); 
+
+ 
+
+if (compararCedula.compareTo(sinEspacio[1])==0) { 
+
+System.out.print("El usuario con cedula " + "( " + sinEspacio[1] + " )" + " es: " + buscar [0] + ", " + buscar [1] + "," + buscar [2] +"," + buscar [3]); 
+
+repetir =0; 
+
+}else { 
+
+System.out.println("ERROR No hay usuario con esa cedula"); 
+
+repetir =1; 
+
+} 
+
+} 
+
+}while(repetir == 1); 
+
+ 
+
+System.out.println("¿Que quiere hacer ahora?"); 
+
+System.out.println("1: ingresar datos"); 
+
+System.out.println("2: Mostrar pasajeros por categoria"); 
+
+System.out.println("3: Volver a buscar pasajero por cedula"); 
+
+System.out.println("0: Salir"); 
+
+System.out.print("Ingrese opcion: "); 
+
+int opcion = teclado.nextInt(); 
+
+ 
+
+switch (opcion) { 
+
+case 1: 
+
+ingresarPasajero (); 
+
+break; 
+
+case 2: 
+
+mostrarPasajeroPorCategoria(); 
+
+break; 
+
+case 3: 
+
+buscarPasajero (); 
+
+break; 
+
+case 0: 
+
+menuPasajero (); 
+
+break; 
+
+default: 
+
+System.out.println("ERROR Opcion incorrecta"); 
+
+} 
+
+ 
+
+}	 
+
+ 
+
+public void menuParada () { 
+
+System.out.println(); 
+
+System.out.println("Ingrese una opcion: "); 
+
+System.out.println("1- Ingresar parada"); 
+
+System.out.println("2- Registrar conexion"); 
+
+System.out.println("0- Salir"); 
+
+System.out.print("Ingrese una opcion: "); 
+
+int opcion = teclado.nextInt(); 
+
+switch (opcion) { 
+
+case 1: 
+
+registrarParada(); 
+
+break; 
+
+case 2: 
+
+registrarConexion();
+
+break; 
+
+case 0: 
+
+menuPrincipal(); 
+
+break; 
+
+default: 
+
+System.out.println(); 
+
+System.out.println("ERROR Ingrese otra opcion"); 
+
+menuParada(); 
+
+} 
+
+} 
+
+ 
+
+public void registrarParada() { 
+
+int cantidad =0; 
+
+do { 
+
+System.out.print("Ingrese la cantidad de paradas que quiera ingresar (MENOR A 10): "); 
+
+cantidad = teclado.nextInt(); 
+
+System.out.println(); 
+
+}while(cantidad >10); 
+
+ 
+
+cantidad *= 2; 
+
+ 
+
+ 
+
+for (int x = 0; x < cantidad; x++) { 
+
+System.out.println("Ingrese el nombre de la parada: "); 
+
+parada[x] = teclado.next(); 
+
+x++; 
+
+System.out.println("Ingrese el codigo de la parada: "); 
+
+parada[x] = teclado.next(); 
+
+ 
+
+} 
+
+System.out.println(); 
+
+System.out.println("¿Que quiere hacer ahora?"); 
+
+System.out.println(); 
+
+System.out.println("1-Volver a ingresar datos"); 
+
+System.out.println("2-Registrar conexion"); 
+
+System.out.println("0- Salir"); 
+
+System.out.print("Ingrese una opcion: "); 
+
+int opcion = teclado.nextInt(); 
+
+ 
+
+switch (opcion) { 
+
+case 1: 
+
+registrarParada(); 
+
+break; 
+
+case 2: 
+
+registrarConexion();
+
+break; 
+
+case 0: 
+
+menuParada(); 
+
+break; 
+
+default: 
+
+System.out.println("ERROR opcion incorrecta"); 
+
+} 
+
+} 
+
+ 
+
+  
+
+public void registrarConexion() { 
+
+System.out.print("Ingrese cuantas paradas quiere ingresar (menor a 10): "); 
+
+        int cantidad = teclado.nextInt(); 
+
+        String codigoOrigen; 
+
+        String codigoDestino; 
+
+
+
+  
+
+         
+
+        while(cantidad < 1 || cantidad > 10){ 
+
+            System.out.println(); 
+
+            System.out.println("ERROR ingreso un numero menor a 1 o mayor de 10"); 
+
+            System.out.println(); 
+
+            System.out.print("Ingrese cuantas paradas de origen quiere ingresar (menor a 10):"); 
+
+            cantidad = teclado.nextInt(); 
+
+             
+
+        } 
+
+        
+
+         
+
+        for (int x = 0; x < (cantidad*3); x++) { 
+        	
+        	
+             
+
+                System.out.print("Ingrese el codigo de la parada de origen numero: "); 
+
+                codigoOrigen = teclado.next(); 
+                
+                	conexion[x] = codigoOrigen;
+                	x++;
+
+                    System.out.print("Ingrese el codigo de la parada de destino: "); 
+
+                    codigoDestino = teclado.next(); 
+                    	   while (codigoOrigen == codigoDestino){ 
+
+                               System.out.println("ERROR ingreso el mismo codigo 2 veces"); 
+
+                               System.out.println(""); 
+
+                               System.out.print("Ingrese nuevamente el codigo de la parada de destino: "); 
+
+                               codigoDestino= teclado.next(); 
+                               conexion[x] = codigoDestino;
+                           } 
+                    	   conexion[x]= codigoDestino;
+                    	   x++;
+
+                            
+
+                           System.out.print("Ingrese la distancia entre ambas paradas (km): "); 
+
+                           conexion[x] = teclado.next(); 
+
+                            
+
+                           while (conexion [x].equals("0")) { 
+
+                               System.out.println(); 
+
+                               System.out.println("ERROR los km no pueden ser menor que 0"); 
+
+                               System.out.println(); 
+
+                               System.out.print("Ingrese nuevamente la distancia: "); 
+
+                               conexion[x] = teclado.next(); 
+
+                           } 
+                           
+                     }                
+
+        
+        System.out.println(); 
+
+        System.out.println("¿Que quiere hacer ahora?"); 
+
+        System.out.println(); 
+
+        System.out.println("1-Ingresar datos"); 
+
+        System.out.println("2-Volver a registrar conexion"); 
+
+        System.out.println("3-Mostrar parada de mayor distancia");
+        System.out.println("0- Salir"); 
+
+        System.out.print("Ingrese una opcion: "); 
+
+        int opcion = teclado.nextInt(); 
+
+         
+
+        switch (opcion) { 
+
+        case 1: 
+
+        registrarParada(); 
+
+        break; 
+
+        case 2: 
+
+        registrarConexion();
+
+        break; 
+        case 3:
+        	paradasConMayorDistancia();
+        break;
+
+        case 0: 
+
+        menuParada(); 
+
+        break; 
+
+        default: 
+
+        System.out.println("ERROR opcion incorrecta"); 
+
+        } 
+
+                 
+}
+
+public void registrarLineaDeOmnibus () {
+	System.out.println("Cuantas conexiones quiere ingresar(MAXIMO 6)");
+	int cantidad = teclado.nextInt();
+	String codigoOrigen;
+	
+	for (int y = 0; y< cantidad; y++) {
+		
+			
+		
+		for (int x =0; x< conexion.length; x++) {
+			if (conexion[x] != null) {
+				System.out.print("Ingrese el codigo de la parada de origen: ");
+				codigoOrigen = teclado.next();
+				x++;
+				lineaConexion[x] = codigoOrigen;
+				if (codigoOrigen.equals(conexion[x])) {
+					
+					System.out.print("Ingrese el codigo de la parada de destino: ");
+					String codigoDestino = teclado.next();
+					lineaConexion[x] = codigoDestino;
+					x++;
+					if (codigoDestino.equals(conexion[x+1]) ) {
+						System.out.print("Ingrese el codigo de la linea: ");
+						String codigoLinea = teclado.next();
+						lineaConexion[x] = codigoLinea;
+						x++;
+						System.out.print("Ingrese los minutos de la linea: ");
+						String minutos = teclado.next();
+						lineaConexion[x] = minutos;
+						x++;
+
+						System.out.print("Ingrese el precio en pesos de la linea: ");
+						String precioEnPesos = teclado.next();
+						lineaConexion[x] = precioEnPesos;
+				}
+			}
+		}
+	}	
+	}
+	
+}
+
+public void paradasConMayorDistancia () { 
+	double mayorDistancia = Double.parseDouble(conexion[2]);
+	
+	for (int x=2; x< conexion.length; x+=3 ) {
+		if (conexion[x] != null) {
+			if (Double.parseDouble(conexion[x])>mayorDistancia) {
+				mayorDistancia = Double.parseDouble(conexion[x]);
+			}
+		}
+	}
+	
+	System.out.println("La mayor conexion entre las paradas es de " + mayorDistancia + " kilometros");
+} 
+
+  
+
+public static void main(String[] args) { 
+
+ej1 e = new ej1(); 
+
+e.menuPrincipal(); 
+
+} 
+
+  
+
+} 
