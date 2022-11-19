@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 import java.util.Scanner; 
 
 public class ej1 { 
@@ -594,39 +594,34 @@ int repetir=0;
 
  
 
-do { 
 
-System.out.print("Ingrese la cedula del usuario a buscar: "); 
+	System.out.println("Ingrese la cedula del usuario a buscar: "); 
 
-String compararCedula = teclado.next(); 
-
- 
-
-for (int i = 0; i < totalPasajeros.length; i++) { 
-
-String buscar[] = totalPasajeros[i].split(","); 
-
-String sinEspacio[] = buscar[1].split(" "); 
+	String compararCedula = teclado.next(); 
 
  
 
-if (compararCedula.compareTo(sinEspacio[1])==0) { 
+	for (int i = 0; i < totalPasajeros.length; i++) { 
 
-System.out.print("El usuario con cedula " + "( " + sinEspacio[1] + " )" + " es: " + buscar [0] + ", " + buscar [1] + "," + buscar [2] +"," + buscar [3]); 
+		String buscar[] = totalPasajeros[i].split(","); 
 
-repetir =0; 
+		String sinEspacio[] = buscar[1].split(" "); 
 
-}else { 
+ 
 
-System.out.println("ERROR No hay usuario con esa cedula"); 
+		if (compararCedula.equals(sinEspacio[1])) { 
 
-repetir =1; 
+			System.out.print("El usuario con cedula " + "( " + sinEspacio[1] + " )" + " es: " + buscar [0] + ", " + buscar [1] + "," + buscar [2] +"," + buscar [3]);
 
-} 
+		}else { 
 
-} 
 
-}while(repetir == 1); 
+			repetir =1; 
+
+		} 
+
+	} 
+
 
  
 
@@ -693,6 +688,7 @@ System.out.println("Ingrese una opcion: ");
 System.out.println("1- Ingresar parada"); 
 
 System.out.println("2- Registrar conexion"); 
+System.out.println("3- Registrar linea de omnibus");
 
 System.out.println("0- Salir"); 
 
@@ -713,6 +709,9 @@ case 2:
 registrarConexion();
 
 break; 
+case 3:
+	registrarLineaDeOmnibus();
+break;
 
 case 0: 
 
@@ -781,6 +780,7 @@ System.out.println();
 System.out.println("1-Volver a ingresar datos"); 
 
 System.out.println("2-Registrar conexion"); 
+System.out.println("3-Registrar linea de omnibus");
 
 System.out.println("0- Salir"); 
 
@@ -803,7 +803,9 @@ case 2:
 registrarConexion();
 
 break; 
-
+case 3:
+	registrarLineaDeOmnibus();
+break;
 case 0: 
 
 menuParada(); 
@@ -825,12 +827,9 @@ System.out.println("ERROR opcion incorrecta");
 public void registrarConexion() { 
 
 System.out.print("Ingrese cuantas paradas quiere ingresar (menor a 10): "); 
-
-        int cantidad = teclado.nextInt(); 
-
-        String codigoOrigen; 
-
-        String codigoDestino; 
+int cantidad = teclado.nextInt(); 
+String codigoOrigen; 
+String codigoDestino; 
 
 
 
@@ -838,9 +837,8 @@ System.out.print("Ingrese cuantas paradas quiere ingresar (menor a 10): ");
 
          
 
-        while(cantidad < 1 || cantidad > 10){ 
-
-            System.out.println(); 
+while(cantidad < 1 || cantidad > 10){ 
+           System.out.println(); 
 
             System.out.println("ERROR ingreso un numero menor a 1 o mayor de 10"); 
 
@@ -921,8 +919,9 @@ System.out.print("Ingrese cuantas paradas quiere ingresar (menor a 10): ");
         System.out.println("1-Ingresar datos"); 
 
         System.out.println("2-Volver a registrar conexion"); 
-
-        System.out.println("3-Mostrar parada de mayor distancia");
+        System.out.println("3-Registrar linea de omnibus");
+        System.out.println("4-Mostrar parada de mayor distancia");
+        System.out.println("5-Mostrar paradas de menor distancia");
         System.out.println("0- Salir"); 
 
         System.out.print("Ingrese una opcion: "); 
@@ -945,8 +944,13 @@ System.out.print("Ingrese cuantas paradas quiere ingresar (menor a 10): ");
 
         break; 
         case 3:
+        	registrarLineaDeOmnibus();
+        break;
+        case 4:
         	paradasConMayorDistancia();
         break;
+        case 5:
+        	paradasConMenorDistancia();
 
         case 0: 
 
@@ -967,27 +971,30 @@ public void registrarLineaDeOmnibus () {
 	System.out.println("Cuantas conexiones quiere ingresar(MAXIMO 6)");
 	int cantidad = teclado.nextInt();
 	String codigoOrigen;
+	int pos=0;
 	
-	for (int y = 0; y< cantidad; y++) {
 		
 			
 		
-		for (int x =0; x< conexion.length; x++) {
+		for (int x =0; x< cantidad*5; x++) {
+			
 			if (conexion[x] != null) {
 				System.out.print("Ingrese el codigo de la parada de origen: ");
 				codigoOrigen = teclado.next();
 				x++;
 				lineaConexion[x] = codigoOrigen;
-				if (codigoOrigen.equals(conexion[x])) {
-					
+				if (codigoOrigen.equals(conexion[pos])) {
+					pos++;
 					System.out.print("Ingrese el codigo de la parada de destino: ");
 					String codigoDestino = teclado.next();
 					lineaConexion[x] = codigoDestino;
 					x++;
-					if (codigoDestino.equals(conexion[x+1]) ) {
+					if (codigoDestino.equals(conexion[pos]) ) {
+						pos+=2;
 						System.out.print("Ingrese el codigo de la linea: ");
 						String codigoLinea = teclado.next();
 						lineaConexion[x] = codigoLinea;
+						
 						x++;
 						System.out.print("Ingrese los minutos de la linea: ");
 						String minutos = teclado.next();
@@ -997,12 +1004,62 @@ public void registrarLineaDeOmnibus () {
 						System.out.print("Ingrese el precio en pesos de la linea: ");
 						String precioEnPesos = teclado.next();
 						lineaConexion[x] = precioEnPesos;
+						
 				}
 			}
 		}
 	}	
-	}
 	
+		System.out.println("¿Que quiere hacer ahora?"); 
+
+        System.out.println(); 
+
+        System.out.println("1-Ingresar datos"); 
+        System.out.println("2-Registrar conexion"); 
+        System.out.println("3-Volver a registrar linea de omnibus");
+        System.out.println("4-Mostrar parada de mayor distancia");
+        System.out.println("5-Mostrar paradas de menor distancia");
+        System.out.println("0- Salir"); 
+
+        System.out.print("Ingrese una opcion: "); 
+
+        int opcion = teclado.nextInt(); 
+
+         
+
+        switch (opcion) { 
+
+        case 1: 
+
+        registrarParada(); 
+
+        break; 
+
+        case 2: 
+
+        registrarConexion();
+
+        break; 
+        case 3:
+        	registrarLineaDeOmnibus();
+        break;
+        case 4:
+        	paradasConMayorDistancia();
+        break;
+        case 5:
+        	paradasConMenorDistancia();
+
+        case 0: 
+
+        menuParada(); 
+
+        break; 
+
+        default: 
+
+        System.out.println("ERROR opcion incorrecta"); 
+
+        } 
 }
 
 public void paradasConMayorDistancia () { 
@@ -1017,7 +1074,123 @@ public void paradasConMayorDistancia () {
 	}
 	
 	System.out.println("La mayor conexion entre las paradas es de " + mayorDistancia + " kilometros");
+	System.out.println("¿Que quiere hacer ahora?"); 
+
+    System.out.println(); 
+
+    System.out.println("1-Ingresar datos"); 
+    System.out.println("2-Registrar conexion"); 
+    System.out.println("3-Registrar linea de omnibus");
+    System.out.println("4-Volver a mostrar parada de mayor distancia");
+    System.out.println("5-Mostrar paradas de menor distancia");
+    System.out.println("0- Salir"); 
+
+    System.out.print("Ingrese una opcion: "); 
+
+    int opcion = teclado.nextInt(); 
+
+     
+
+    switch (opcion) { 
+
+    case 1: 
+
+    registrarParada(); 
+
+    break; 
+
+    case 2: 
+
+    registrarConexion();
+
+    break; 
+    case 3:
+    	registrarLineaDeOmnibus();
+    break;
+    case 4:
+    	paradasConMayorDistancia();
+    break;
+    case 5:
+    	paradasConMenorDistancia();
+
+    case 0: 
+
+    menuParada(); 
+
+    break; 
+
+    default: 
+
+    System.out.println("ERROR opcion incorrecta"); 
+
+    } 
 } 
+
+public void paradasConMenorDistancia () {
+	double menorDistancia = Double.parseDouble(conexion[2]);
+	
+	for (int x=2; x< conexion.length; x+=3 ) {
+		if (conexion[x] != null) {
+			if (Double.parseDouble(conexion[x])<menorDistancia) {
+				if (Double.parseDouble(conexion[x])>0) {
+					menorDistancia = Double.parseDouble(conexion[x]);
+				}
+			}
+		}
+	}
+	
+	System.out.println("La mayor conexion entre las paradas es de " + menorDistancia + " kilometros");
+	System.out.println("¿Que quiere hacer ahora?"); 
+
+    System.out.println(); 
+
+    System.out.println("1-Ingresar datos"); 
+    System.out.println("2-Registrar conexion"); 
+    System.out.println("3-Registrar linea de omnibus");
+    System.out.println("4-Mostrar parada de mayor distancia");
+    System.out.println("5-Volver a mostrar paradas de menor distancia");
+    System.out.println("0- Salir"); 
+
+    System.out.print("Ingrese una opcion: "); 
+
+    int opcion = teclado.nextInt(); 
+
+     
+
+    switch (opcion) { 
+
+    case 1: 
+
+    registrarParada(); 
+
+    break; 
+
+    case 2: 
+
+    registrarConexion();
+
+    break; 
+    case 3:
+    	registrarLineaDeOmnibus();
+    break;
+    case 4:
+    	paradasConMayorDistancia();
+    break;
+    case 5:
+    	paradasConMenorDistancia();
+
+    case 0: 
+
+    menuParada(); 
+
+    break; 
+
+    default: 
+
+    System.out.println("ERROR opcion incorrecta"); 
+
+    } 
+}
 
   
 
